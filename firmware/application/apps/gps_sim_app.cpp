@@ -24,7 +24,22 @@
 INSTRUCTIONS
 https://github.com/osqzss/gps-sdr-sim/wiki/Real-Time-Streaming-to-HackRF
 https://slowmin.com/fake-gps-with-a-hackrf-one/
+--------
+https://blog.csdn.net/shukebeta008/article/details/104311290
+https://translate.google.com/translate?sl=zh-CN&tl=en&u=https%3A%2F%2Fblog.csdn.net%2Fshukebeta008%2Farticle%2Fdetails%2F104311290
 
+I used the following command to generate a GPS data file. Instead of using a 2.6MHz sampling rate, I used 2MHz. It is more convenient to sample it later, and I find that it can be located
+./gps-sdr-sim -e brdc3540.14n -l 40,110,100 -b 8 -s 2000000
+
+This is not to use portapack, but to directly use the computer to launch the data file generated earlier. I increased the transmission gain here to 30, otherwise the waveform will not be seen in the spectrum.
+This mode of searching for the star has to wait for a while, and sometimes it will lose the lock after a little movement after locking.
+hackrf_transfer -t gpssim.bin -f 1575420000 -s 2000000 -a 1 -x 30
+
+You can also generate a trajectory and then use portapack to launch it. The following is the iq data generated based on the circle.csv trajectory.
+./gps-sdr-sim -e brdc3540.14n -u circle.csv -b 8 -s 2000000
+The trace file supports a maximum length of 300 seconds, an 8bit 2MHz sampling rate, and a 1.2GB file. I tested that both the phone and gnss-sdr can be locked, and I can see that the position is changing. 
+-------
+ 
 ./gps-sdr-sim -e brdc3540.14n -s 2500000 -b 8 -o gpssim.c8 
 ./gps-sdr-sim -e brdc3540.14n -l 40,110,100 -b 8 -o gpssim.c8 
 

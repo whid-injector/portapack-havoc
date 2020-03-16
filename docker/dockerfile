@@ -2,7 +2,15 @@
 #The ubuntu:latest tag points to the "latest LTS"
 FROM ubuntu:latest
 
-
+# copy this file into a empty directory
+# cd in it==this new directory
+# docker build .
+# docker images
+# docker run -ti <image ID> /bin/bash
+# docker run -ti c711458c81c2 /bin/bash
+#DONE AT THE END OF THIS SCRIPT AUTOMATICALLY# tar -zcvf build.tar.gz build/
+#DONE AT THE END OF THIS SCRIPT AUTOMATICALLY# apt-get install netcat net-tools -y
+# try wget 172.17.0.3:8080/hackrf_havoc_.bin from your own machine
 # (on scaleway VPS:  nc -l -p 1234 > hackrf_havoc_.bin)
 # nc IP 1234 < hackrf_havoc_.bin
 
@@ -46,4 +54,4 @@ RUN git clone https://github.com/whid-injector/portapack-havoc.git portapack-hav
 
 RUN cd portapack-havoc && git submodule update --init --recursive && mkdir build && cd build && cmake .. && make firmware && cd firmware && shasum  portapack-h1-havoc.bin 
 
-# RUN  nc sec-startup.com P 1234 < portapack-h1-havoc.bin
+# RUN  nc xxxxxx.com P 1234 < portapack-h1-havoc.bin
